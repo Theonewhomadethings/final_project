@@ -19,7 +19,7 @@ def main(K, N):
         #if (len(indicesN) < numbOfStatesN):
         indicesN.add(sum1)
         #indicesN.append(sum1)
-        fillOrNot = np.dot(e_k, indicesN)
+     #   fillOrNot = np.dot(e_k, indicesN)
     print(indicesN)
     print(len(indicesN))
   
