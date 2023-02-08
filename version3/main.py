@@ -1,6 +1,7 @@
 import numpy as np
 
 indicesN = []
+E_n = []
 
 
 def main(K, N):
@@ -10,13 +11,15 @@ def main(K, N):
     for n in range(0, 2**K):
         n_k = list(f"{n:010b}")
         test_list = list(map(int, n_k))
-        flip = np.transpose(test_list)
-       # print(test_list)
+        dotP = np.dot(test_list, e_k)
+        # print(test_list)
         #tempSum = np.sum(n_k)
         tempSum = np.sum(test_list)
         if (tempSum == N):
             indicesN.append(n)
-            #if (n < 100):
-                #print(n, test_list, tempSum)
-    print("How many fermions = 5 ", len(indicesN))
+            E_n.append(dotP)
+            if (n < 2**K):
+                print(n, test_list, tempSum)
+    print("How many fermions =  ", len(indicesN))
+    print("size of energy array", len(E_n))
 main(K=10, N = 5)
