@@ -1,12 +1,22 @@
 import numpy as np
 
+indicesN = []
+
+
 def main(K, N):
-    for i in range(0, 2**K):
-        n_k = list(f"{i:010b}")
+    e_k = np.random.normal(loc = 0, scale = 1, size = K) #Loc = Mean, Scale = Standard deviation, size = Output shape (10, )
+    print("n  [9, 8, 7, 6, 5, 4, 3, 2, 1, 0] N") # debug print statement
+    print("\n")
+    for n in range(0, 2**K):
+        n_k = list(f"{n:010b}")
         test_list = list(map(int, n_k))
+        flip = np.transpose(test_list)
        # print(test_list)
+        #tempSum = np.sum(n_k)
         tempSum = np.sum(test_list)
-        #if (tempSum == N):
-         #   print(i, test_list)
-        print(i, n_k)
+        if (tempSum == N):
+            indicesN.append(n)
+            #if (n < 100):
+                #print(n, test_list, tempSum)
+    print("How many fermions = 5 ", len(indicesN))
 main(K=10, N = 5)
