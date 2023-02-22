@@ -43,31 +43,65 @@ def main(K, N, stand_dev, delta_t):
     #print("This is the shape of the eigenvalues", np.shape(w))
     D = np.zeros(shape = (numbOfStatesN, numbOfStatesN))#empty matrix
     np.fill_diagonal(D, val = w)
-    print(w)
-    z = 0 + 1j # 
-    #tempEvol = math.exp(-z*delta_t*D)
-    #print(tempEvol)
-    tempEvoleig = np.zeros(shape=(numbOfStatesN, numbOfStatesN))
-    wNew = []
-    for n in w:
-        wNew.append(math.exp(z*n*delta_t))
-    print(wNew)
+    E = np.zeros(shape=(numbOfStatesN, numbOfStatesN), dtype= "complex")
+    for i in range(252):
+        w_element = D[i][i]
+        E[i][i] = np.exp(-1j*w_element*delta_t)
+    #print(np.shape(E))
+    p = v 
+    '''
+    w = (252, 252)
+    v = (252)
+    Note for the eigenvector the column v[:,i] is the eigenvector
+    corresponding to the eigenvalue w[i]    
+    '''
+    eigenvector1= v[:,1]
+    eigvalue1 = w[1]
+    #print(eigenvector1)
+    #print(eigvalue1)
+    p_t = np.transpose(p)
+    evolution_op = p*E*p_t
+   # print(evolution_op)
+    initial_state = indicesN[0]
+    print(len(indicesN))
+   # for i in range(252):
+
 main(K=10, N = 5, stand_dev = 0.05, delta_t=0.01)
+'''
+question 1
+How do I intrepret the eigenvector columns that correspond to a single eigenvalue
+w = (252, 252)
+v = (252, )
 
-def interaction(stand_dev):
-    wMatrix = np.random.normal(loc = 0, scale = stand_dev, size = ())
-    wMatrixT = np.transpose(wMatrix)
-    wOnwT = np.multiply(wMatrix, wMatrixT)
-    print(wOnwT)
-    print(wOnwT.shape())
-    #wTrace = np.trace(wOnwT)
-   # print(wTrace)
-    #dimensions of matrix?
-    #independent iddenticallly distributed  entries meaning
-    #gaussian of mean 0, standard deviation sigma_w
-    #areal asumetric matrix
-    
-    #sanity check trace of w multiplied by its transpose tr(W*W^T) APPROX = STANDARD DEV^2 TIMES THE NUMBER OF MANY BODY STATES
-    #Trace - defined to be the sum of elements on the main diagonal
+Question 2
+When choosing this initial state what kind of form does it take,
+does it matter what it is
+show him my current initial state to see if it works
 
-#interaction(stand_dev=0.05)
+Question 3
+I am struggling to construct my for loop for question 3
+for i in range()?
+for n in array?
+how many iterations
+what does it mean by on each time step
+
+Question 4)
+what is the evolution operator being multiplied by in each iteration in the loop?
+Because I am struggling to understand this . I need a vector of the same dimensions length wise to make the multiplaction work right?
+the only vector i have of the same size is the indices N array
+
+Question 5) 
+ask if hes available for a quick meeting on friday possibly?
+cos I have been stuck on question 3 and will probably need to double check this question result to check if it is correct
+and ask about question 4
+as next week I want to try present him the final project code draft as I need to submit a draft paper too.
+
+Question 6) 
+At the beggining or end, ask him to maybe check your current code or ask him if its easier to send it via github or email, to just ask him to take a look and see if there are any errors I am missing.
+
+Also ask about the form of your evolution operator matrix as it looks a bit weird, show him step by step how you construct it as the P and Ptranspose array might be wrong as your strugling to work with it.
+
+question 7) 
+is the evolution operator meant to be complex?
+as i was having issues debugging and multiplying real matrices with imaginary matrices?
+'''
