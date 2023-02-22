@@ -1,10 +1,11 @@
 import numpy as np
 from math import comb
+import math
 
 indicesN = []
 E_n = []
 
-def main(K, N, stand_dev):
+def main(K, N, stand_dev, delta_t):
     e_k = np.random.normal(loc = 0, scale = 1, size = K) #Loc = Mean, Scale = Standard deviation, size = Output shape (10, )
     #print("n  [9, 8, 7, 6, 5, 4, 3, 2, 1, 0] N") # debug print statement
     #print("\n")
@@ -28,9 +29,30 @@ def main(K, N, stand_dev):
     np.fill_diagonal(H_0, val = E_n)
    # print(H_0)
     wMatrix = np.random.normal(loc = 0, scale = stand_dev, size = (numbOfStatesN, numbOfStatesN))
-    #print(wMatrix)
+    wMatrixT = np.transpose(wMatrix)
+   # print("W matrix =", wMatrix)
+    #print("W transpose m = ", wMatrixT)
+    wPrime = (wMatrix + wMatrixT) / 2
+   # print("wPrime = ", wPrime)
+ #   print(np.shape(wPrime))
    # print(len(wMatrix))
-main(K=10, N = 5, stand_dev = 0.05)
+    H = np.add(H_0, wPrime)
+    #print(H)
+    w, v = np.linalg.eig(H)
+    #print("These are the eigenvalues: ", w)
+    #print("This is the shape of the eigenvalues", np.shape(w))
+    D = np.zeros(shape = (numbOfStatesN, numbOfStatesN))#empty matrix
+    np.fill_diagonal(D, val = w)
+    print(w)
+    z = 0 + 1j # 
+    #tempEvol = math.exp(-z*delta_t*D)
+    #print(tempEvol)
+    tempEvoleig = np.zeros(shape=(numbOfStatesN, numbOfStatesN))
+    wNew = []
+    for n in w:
+        wNew.append(math.exp(z*n*delta_t))
+    print(wNew)
+main(K=10, N = 5, stand_dev = 0.05, delta_t=0.01)
 
 def interaction(stand_dev):
     wMatrix = np.random.normal(loc = 0, scale = stand_dev, size = ())
@@ -48,4 +70,4 @@ def interaction(stand_dev):
     #sanity check trace of w multiplied by its transpose tr(W*W^T) APPROX = STANDARD DEV^2 TIMES THE NUMBER OF MANY BODY STATES
     #Trace - defined to be the sum of elements on the main diagonal
 
-interaction(stand_dev=0.05)
+#interaction(stand_dev=0.05)
