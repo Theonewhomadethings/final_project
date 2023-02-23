@@ -89,5 +89,5 @@ question 3
 what is the maximum number of 1s and 0s in the vector
 
 question 4
-
-'''
+quick side question, would you count this project as a theoretical or computaional physics project?
+''
