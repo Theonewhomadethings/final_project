@@ -4,8 +4,7 @@ import math
 
 indicesN = []
 E_n = []
-
-def main(K, N, stand_dev, delta_t):
+def main(K, N, stand_dev, delta_t, iteration2):
     e_k = np.random.normal(loc = 0, scale = 1, size = K) #Loc = Mean, Scale = Standard deviation, size = Output shape (10, )
     #print("n  [9, 8, 7, 6, 5, 4, 3, 2, 1, 0] N") # debug print statement
     #print("\n")
@@ -61,47 +60,34 @@ def main(K, N, stand_dev, delta_t):
     #print(eigvalue1)
     p_t = np.transpose(p)
     evolution_op = p*E*p_t
-   # print(evolution_op)
-    initial_state = indicesN[0]
-    print(len(indicesN))
-   # for i in range(252):
+    #print(evolution_op)
+    initial_state = np.zeros(shape = (numbOfStatesN))
 
-main(K=10, N = 5, stand_dev = 0.05, delta_t=0.01)
+    print(initial_state)
+
+    for i in range(iteration2):
+        intial_state = np.multiply(evolution_op, initial_state) 
+
+main(K=10, N = 5, stand_dev = 0.05, delta_t=0.01, iteration2 = 1000)
+
+
+
+
+
+
+
+
+
 '''
 question 1
-How do I intrepret the eigenvector columns that correspond to a single eigenvalue
-w = (252, 252)
-v = (252, )
+In the initial state how many ones and zeroes should there be
 
-Question 2
-When choosing this initial state what kind of form does it take,
-does it matter what it is
-show him my current initial state to see if it works
+question 2 
+Is it on purpose or random whether there is a 1 or 0 placed in this vector
 
-Question 3
-I am struggling to construct my for loop for question 3
-for i in range()?
-for n in array?
-how many iterations
-what does it mean by on each time step
+question 3
+what is the maximum number of 1s and 0s in the vector
 
-Question 4)
-what is the evolution operator being multiplied by in each iteration in the loop?
-Because I am struggling to understand this . I need a vector of the same dimensions length wise to make the multiplaction work right?
-the only vector i have of the same size is the indices N array
+question 4
 
-Question 5) 
-ask if hes available for a quick meeting on friday possibly?
-cos I have been stuck on question 3 and will probably need to double check this question result to check if it is correct
-and ask about question 4
-as next week I want to try present him the final project code draft as I need to submit a draft paper too.
-
-Question 6) 
-At the beggining or end, ask him to maybe check your current code or ask him if its easier to send it via github or email, to just ask him to take a look and see if there are any errors I am missing.
-
-Also ask about the form of your evolution operator matrix as it looks a bit weird, show him step by step how you construct it as the P and Ptranspose array might be wrong as your strugling to work with it.
-
-question 7) 
-is the evolution operator meant to be complex?
-as i was having issues debugging and multiplying real matrices with imaginary matrices?
 '''
